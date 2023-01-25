@@ -1,0 +1,78 @@
+<mat-toolbar color ="primary"></mat-toolbar>
+<h2>Creación Usuarios</h2>
+<form (ngSubmit)="guardarCambios()"[formGroup]="form">
+        <mat-form-field appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input formControlName="Usuario" matInput />
+        </mat-form-field>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="Nombre" matInput />
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Cargo</mat-label>
+            <input formControlName="Cargo" matInput />
+        </mat-form-field>
+    </div>
+    <div>    
+        <mat-form-field appearance="outline">
+            <mat-label>Telefono</mat-label>
+            <input formControlName="Telefono" matInput />
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Correo Electronico</mat-label>
+            <input formControlName="Correo" matInput />
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Tipo de contacto</mat-label>
+            <mat-select [formControl]="tipoContacto">
+                <mat-option *ngFor="let contacto of contactos" [value]="contacto">
+                    {{ contacto.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <button type="submit" mat-flat-button color="primary">
+            Guardar
+        </button>
+    </div>
+</form>
+
+<ng-container content>
+    <table #table mat-table [dataSource]="usuarios" class="mat-elevation-z8 employee-table">
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef>Codigo de cliente</th>
+            <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombre Completo</th>
+            <td mat-cell *matCellDef="let element">{{element.nombre}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Cargo">
+            <th mat-header-cell *matHeaderCellDef>Cargo</th>
+            <td mat-cell *matCellDef="let element">{{element.cargo}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Telefono">
+            <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+            <td mat-cell *matCellDef="let element">{{element.telefono}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Correo">
+            <th mat-header-cell *matHeaderCellDef>Correo Electrónico</th>
+            <td mat-cell *matCellDef="let element">{{element.correo}}</td>
+        </ng-container>
+        <ng-container matColumnDef="TipoContacto">
+            <th mat-header-cell *matHeaderCellDef>Tipo De Contacto</th>
+            <td mat-cell *matCellDef="let element">{{element.tipoContacto}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</ng-container>
